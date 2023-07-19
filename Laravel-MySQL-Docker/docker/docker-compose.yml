@@ -1,0 +1,50 @@
+version: '3'
+
+networks:
+  laravel:
+
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    ports:
+      - '8080:80'
+    volumes:
+      - ../:/var/www
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+      - mysql
+    networks:
+      - laravel
+  mysql:
+    image: mysql:8
+    container_name: mysql8
+    restart: unless-stopped
+    tty: true
+    ports:
+      - '3306:3306'
+    # remove volumes if you don't want persistent storage
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_DATABASE: sandpit
+      MYSQL_USER: sandpit
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - laravel
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: php82-fpm-alpine
+    volumes:
+      - ../:/var/www
+    ports:
+      - '9000:9000'
+    networks:
+      - laravel
