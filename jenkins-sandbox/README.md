@@ -1,6 +1,6 @@
 # Jenkins-Sandbox README
 
-This project contains the required file to run Jenkins LTS, 2 x Ubuntu LTS with Java 17 and MySQL.
+This project contains the required file to run Jenkins LTS, 2 x Ubuntu LTS with Java 17 and MySQL 8.
 
 ## How to
 To create the Docker containers:
