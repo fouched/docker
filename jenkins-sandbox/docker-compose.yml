@@ -1,0 +1,61 @@
+version: '3'
+
+networks:
+  sandbox-nw:
+
+services:
+  jenkins:
+    build:
+      context: .
+      dockerfile: ./jenkins-controller/Dockerfile
+    container_name: jenkins-controller
+    volumes:
+      - ./jenkins-controller/jenkins_home:/var/jenkins_home
+    ports:
+      - '9080:8080'
+    networks:
+      - sandbox-nw
+  app01:
+    build:
+      context: .
+      dockerfile: ./app01/Dockerfile
+    container_name: app01
+    volumes:
+      - ./app01/deployments:/opt/deployments
+    ports:
+      - '9022:22'
+      - '9081:8080'
+    networks:
+      - sandbox-nw
+  app02:
+    build:
+      context: .
+      dockerfile: ./app02/Dockerfile
+    container_name: app02
+    volumes:
+      - ./app02/deployments:/opt/deployments
+    ports:
+      - '9023:22'
+      - '9082:8080'
+    networks:
+      - sandbox-nw
+  db01:
+    image: mysql:8
+    container_name: db01
+    restart: unless-stopped
+    tty: true
+    ports:
+      - '13306:3306'
+    # remove volumes if you don't want persistent storage
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_DATABASE: sandbox
+      MYSQL_USER: sandbox
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - sandbox-nw
