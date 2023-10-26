@@ -1,5 +1,5 @@
 # Artemis README
-This project contains the required files to run 3 networked instances of Artemis. Essentially providing an environment to test things like bridges.
+This project contains the required files to run 3 networked instances of Apache Artemis. Essentially providing an environment to test things like bridges.
 
 ## How to
 
