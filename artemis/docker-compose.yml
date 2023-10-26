@@ -1,0 +1,31 @@
+version: '3'
+
+networks:
+  artemis:
+
+services:
+  artemis1:
+    image: apache/activemq-artemis:latest-alpine
+    container_name: artemis1
+    ports:
+      - '61616:61616'
+      - '8161:8161'
+    networks:
+      - artemis
+  artemis2:
+    image: apache/activemq-artemis:latest-alpine
+    container_name: artemis2
+    ports:
+      - '61617:61616'
+      - '8162:8161'
+    networks:
+      - artemis
+  artemis3:
+    image: apache/activemq-artemis:latest-alpine
+    container_name: artemis3
+    ports:
+      - '61618:61616'
+      - '8163:8161'
+    networks:
+      - artemis
+
