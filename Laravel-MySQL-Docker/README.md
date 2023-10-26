@@ -14,7 +14,7 @@ This project contains the required files to run Laravel 9.x in Docker with PHP 8
 
 ## How to
 
-1. **Only** copy the **docker** folder into the root (top level) of an existing Laravel 9.x project
+1. **Only** copy the **docker** folder into the root (top level) of an existing Laravel 9.x or 10.x project
 2. Staying in the root directory run the docker compose command, changing **-p <project-name>** below to the name you would like to use.
 
 For example from:

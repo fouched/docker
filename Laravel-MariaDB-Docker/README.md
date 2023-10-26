@@ -4,7 +4,7 @@ This project contains the required files to run Laravel 9.x in Docker with PHP 8
 and persistent storage for MySQL 8.
 
 ## How to
-1. Copy the docker folder into the root (top level) of an existing Laravel 9.x project
+1. Copy the docker folder into the root (top level) of an existing Laravel 9.x or 10.x project
 2. Within the directory run the docker compose command, changing **-p <project-name>** below to the name you would like to use.
 
 For example from:
